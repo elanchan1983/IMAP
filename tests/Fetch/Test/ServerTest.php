@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Fetch\Test;
+namespace Imap\Test;
 
-use Fetch\Server;
+use Imap\Server;
 
 /**
  * @package Fetch

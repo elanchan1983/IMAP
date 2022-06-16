@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fetch;
+namespace Imap;
 
 /**
  * This library is a wrapper around the Imap library functions included in php. This class in particular manages a
@@ -431,7 +431,7 @@ class Server
     public function getMessageByUid($uid)
     {
         try {
-            $message = new \Fetch\Message($uid, $this);
+            $message = new \Imap\Message($uid, $this);
 
             return $message;
         } catch (\Exception $e) {

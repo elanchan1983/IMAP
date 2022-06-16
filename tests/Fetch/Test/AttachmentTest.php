@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Fetch\Test;
+namespace Imap\Test;
 
 /**
  * @package Fetch
@@ -21,7 +21,7 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
     public static function getAttachments($MessageId)
     {
         $server = ServerTest::getServer();
-        $message = new \Fetch\Message($MessageId, $server);
+        $message = new \Imap\Message($MessageId, $server);
         $attachments = $message->getAttachments();
         $returnAttachments = array();
         foreach($attachments as $attachment)

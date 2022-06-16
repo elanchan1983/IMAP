@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Fetch\Test;
-use Fetch\Message;
+namespace Imap\Test;
+use Imap\Message;
 
 /**
  * @package Fetch
@@ -22,7 +22,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     {
         $server = ServerTest::getServer();
 
-        return new \Fetch\Message($id, $server);
+        return new \Imap\Message($id, $server);
     }
 
     public function testConstructMessage()
@@ -151,7 +151,7 @@ class MessageTest extends \PHPUnit_Framework_TestCase
     public function testGetImapBox()
     {
         $server = ServerTest::getServer();
-        $message = new \Fetch\Message('3', $server);
+        $message = new \Imap\Message('3', $server);
         $this->assertEquals($server, $message->getImapBox(), 'getImapBox returns Server used to create Message.');
     }
 
