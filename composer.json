@@ -1,8 +1,8 @@
 {
-  "name": "tedivm/fetch",
+  "name": "elanchan1983/imap",
   "description": "A PHP IMAP Library",
   "keywords": ["email","imap","pop3"],
-  "homepage": "http://github.com/tedious/Fetch",
+  "homepage": "http://github.com/elanchan1983/IMAP",
   "type": "library",
   "license": "BSD-3-Clause",
   "authors": [
@@ -20,7 +20,6 @@
     "phpunit/phpunit": "4.2.*",
     "fabpot/php-cs-fixer": "0.5.*",
     "satooshi/php-coveralls": "dev-master"
-
     },
   "autoload": {
     "psr-0": {"Fetch": "src/"}
