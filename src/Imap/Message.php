@@ -233,22 +233,20 @@ class Message
      */
     protected function loadMessage()
     {
-
         /* First load the message overview information */
-
         if (!is_object($messageOverview = $this->getOverview()))
-
             return false;
-
-        $this->subject = MIME::decode($messageOverview->subject, self::$charset);
-        $this->date = strtotime($messageOverview->date);
+        if(isset($messageOverview->subject))
+            $this->subject = MIME::decode($messageOverview->subject, self::$charset);
+        else
+            $this->subject = null;
+        $this->date = strtotime($messageOverview->date ? $messageOverview->date : $messageOverview->udate);
         $this->size = $messageOverview->size;
 
         foreach (self::$flagTypes as $flag)
             $this->status[$flag] = ($messageOverview->$flag == 1);
 
         /* Next load in all of the header information */
-
         $headers = $this->getHeaders();
 
         if (isset($headers->to))

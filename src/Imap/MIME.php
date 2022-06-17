@@ -32,11 +32,14 @@ final class MIME
             return null;
         }
 
+        if(strtoupper(mb_detect_encoding($text)) == strtoupper($targetCharset)) {
+            return $text;
+        }
+
         $result = '';
-
         foreach (imap_mime_header_decode($text) as $word) {
-            $ch = 'default' === $word->charset ? 'ascii' : $word->charset;
 
+            $ch = 'default' === $word->charset ? 'ascii' : $word->charset;
             $result .= iconv($ch, $targetCharset, $word->text);
         }
 
