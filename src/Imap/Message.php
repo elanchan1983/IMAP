@@ -528,7 +528,8 @@ class Message
             if (!empty($parameters['charset']) && $parameters['charset'] !== self::$charset) {
                 $mb_converted = false;
                 if (function_exists('mb_convert_encoding')) {
-                    if (!in_array($parameters['charset'], mb_list_encodings())) {
+                    $parameters['charset'] = strtolower($parameters['charset']) == 'gb2312' ? 'gb18030' : $parameters['charset'];
+                    if (!in_array(strtolower($parameters['charset']), array_map('strtolower', mb_list_encodings()))) {
                         if ($structure->encoding === 0) {
                             $parameters['charset'] = 'US-ASCII';
                         } else {
