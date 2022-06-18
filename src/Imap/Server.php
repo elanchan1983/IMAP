@@ -281,7 +281,7 @@ class Server
      *
      * @return string
      */
-    protected function getServerSpecification()
+    public function getServerSpecification()
     {
         $mailboxPath = '{' . $this->serverPath;
 
