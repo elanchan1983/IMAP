@@ -249,6 +249,22 @@ class Message
         /* Next load in all of the header information */
         $headers = $this->getHeaders();
 
+        if (isset($headers->toaddress))
+            $headers->toaddress = mb_convert_encoding($headers->toaddress, self::$charset);
+
+        if (isset($headers->fromaddress))
+            $headers->fromaddress = mb_convert_encoding($headers->fromaddress, self::$charset);
+
+        if (isset($headers->reply_toaddress))
+            $headers->reply_toaddress = mb_convert_encoding($headers->reply_toaddress, self::$charset);
+
+        if (isset($headers->senderaddress))
+            $headers->senderaddress = mb_convert_encoding($headers->senderaddress, self::$charset);
+
+        if (isset($headers->ccaddress))
+            $headers->ccaddress = mb_convert_encoding($headers->ccaddress, self::$charset);
+
+
         if (isset($headers->to))
             $this->to = $this->processAddressObject($headers->to);
 
@@ -678,6 +694,9 @@ class Message
             foreach ($addresses as $address) {
                 if (property_exists($address, 'mailbox') && $address->mailbox != 'undisclosed-recipients') {
                     $currentAddress = array();
+                    if (strtoupper($address->host) == 'UNKNOWN') {
+                        $address->mailbox = bin2hex($address->mailbox);
+                    }
                     $currentAddress['address'] = $address->mailbox . '@' . $address->host;
                     if (isset($address->personal)) {
                         $currentAddress['name'] = MIME::decode($address->personal, self::$charset);

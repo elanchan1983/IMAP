@@ -40,9 +40,16 @@ final class MIME
         foreach (imap_mime_header_decode($text) as $word) {
 
             $ch = 'default' === $word->charset ? 'ascii' : $word->charset;
-            $result .= iconv($ch, $targetCharset, $word->text);
+            try {
+                //$result .= iconv($ch, $targetCharset, $word->text);
+                $result .= mb_convert_encoding($word->text, $targetCharset, $ch);
+            } catch (\Exception $e) {
+                $result .= '';
+            }
         }
-
+        if(!$result) {
+            $result = mb_decode_mimeheader($text);
+        }
         return $result;
     }
 }
