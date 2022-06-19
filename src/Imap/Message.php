@@ -240,7 +240,12 @@ class Message
             $this->subject = MIME::decode($messageOverview->subject, self::$charset);
         else
             $this->subject = null;
-        $this->date = strtotime($messageOverview->date ? $messageOverview->date : $messageOverview->udate);
+
+        // fix encoding
+        if(isset($messageOverview->from))
+            $messageOverview->from = mb_convert_encoding($messageOverview->from, self::$charset);
+
+        $this->date = strtotime($messageOverview->date ?: $messageOverview->udate);
         $this->size = $messageOverview->size;
 
         foreach (self::$flagTypes as $flag)
